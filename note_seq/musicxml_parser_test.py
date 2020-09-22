@@ -801,7 +801,7 @@ class MusicXMLParserTest(testing_lib.ProtoTestCase):
         </part>
       </score-partwise>
     """
-    with tempfile.NamedTemporaryFile() as temp_file:
+    with tempfile.NamedTemporaryFile(delete=False, ) as temp_file:
       temp_file.write(xml)
       temp_file.flush()
       ns = musicxml_reader.musicxml_file_to_sequence_proto(
@@ -842,7 +842,7 @@ class MusicXMLParserTest(testing_lib.ProtoTestCase):
         </part>
       </score-partwise>
     """
-    with tempfile.NamedTemporaryFile() as temp_file:
+    with tempfile.NamedTemporaryFile(delete=False, ) as temp_file:
       temp_file.write(xml)
       temp_file.flush()
       ns = musicxml_reader.musicxml_file_to_sequence_proto(
@@ -881,7 +881,7 @@ class MusicXMLParserTest(testing_lib.ProtoTestCase):
       <score-partwise version="3.0">
       </score-partwise>
     """
-    with tempfile.NamedTemporaryFile() as temp_file:
+    with tempfile.NamedTemporaryFile(delete=False, ) as temp_file:
       temp_file.write(xml)
       temp_file.flush()
       ns = musicxml_reader.musicxml_file_to_sequence_proto(
@@ -952,7 +952,7 @@ class MusicXMLParserTest(testing_lib.ProtoTestCase):
           testing_lib.get_testdata_dir(), 'unpitched.xml'))
 
   def test_empty_archive(self):
-    with tempfile.NamedTemporaryFile(suffix='.mxl') as temp_file:
+    with tempfile.NamedTemporaryFile(delete=False, suffix='.mxl') as temp_file:
       z = zipfile.ZipFile(temp_file.name, 'w')
       z.close()
 
@@ -1635,7 +1635,7 @@ class MusicXMLParserTest(testing_lib.ProtoTestCase):
         </part>
       </score-partwise>
     """
-    with tempfile.NamedTemporaryFile() as temp_file:
+    with tempfile.NamedTemporaryFile(delete=False, ) as temp_file:
       temp_file.write(xml)
       temp_file.flush()
       with self.assertRaises(musicxml_parser.KeyParseError):
@@ -1680,7 +1680,7 @@ class MusicXMLParserTest(testing_lib.ProtoTestCase):
         </part>
       </score-partwise>
     """
-    with tempfile.NamedTemporaryFile() as temp_file:
+    with tempfile.NamedTemporaryFile(delete=False, ) as temp_file:
       temp_file.write(xml)
       temp_file.flush()
       with self.assertRaises(musicxml_parser.ChordSymbolParseError):
@@ -1731,7 +1731,7 @@ class MusicXMLParserTest(testing_lib.ProtoTestCase):
         </part>
       </score-partwise>
     """
-    with tempfile.NamedTemporaryFile() as temp_file:
+    with tempfile.NamedTemporaryFile(delete=False, ) as temp_file:
       temp_file.write(xml)
       temp_file.flush()
       musicxml_parser.MusicXMLDocument(temp_file.name)
@@ -1773,7 +1773,7 @@ class MusicXMLParserTest(testing_lib.ProtoTestCase):
         </part>
       </score-partwise>
     """
-    with tempfile.NamedTemporaryFile() as temp_file:
+    with tempfile.NamedTemporaryFile(delete=False, ) as temp_file:
       temp_file.write(xml)
       temp_file.flush()
       with self.assertRaises(musicxml_parser.TimeSignatureParseError):
@@ -1812,7 +1812,7 @@ class MusicXMLParserTest(testing_lib.ProtoTestCase):
         </part>
       </score-partwise>
     """
-    with tempfile.NamedTemporaryFile() as temp_file:
+    with tempfile.NamedTemporaryFile(delete=False, ) as temp_file:
       temp_file.write(xml)
       temp_file.flush()
       with self.assertRaises(musicxml_parser.InvalidNoteDurationTypeError):

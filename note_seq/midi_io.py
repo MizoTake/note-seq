@@ -208,7 +208,7 @@ def note_sequence_to_midi_file(sequence, output_file,
   """
   pretty_midi_object = note_sequence_to_pretty_midi(
       sequence, drop_events_n_seconds_after_last_note)
-  with tempfile.NamedTemporaryFile() as temp_file:
+  with tempfile.NamedTemporaryFile(delete=False, ) as temp_file:
     pretty_midi_object.write(temp_file)
     # Before copying the file, flush any contents
     temp_file.flush()

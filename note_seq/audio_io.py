@@ -118,7 +118,7 @@ def wav_data_to_samples_librosa(audio_file, sample_rate):
   Raises:
     AudioIOReadException: If librosa is unable to load the audio data.
   """
-  with tempfile.NamedTemporaryFile(suffix='.wav') as wav_input_file:
+  with tempfile.NamedTemporaryFile(delete=False, suffix='.wav') as wav_input_file:
     wav_input_file.write(audio_file)
     # Before copying the file, flush any contents
     wav_input_file.flush()

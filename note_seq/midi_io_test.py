@@ -174,7 +174,7 @@ class MidiIoTest(absltest.TestCase):
 
     # When writing to the temp file, use the file object itself instead of
     # file.name to avoid the permission error on Windows.
-    with tempfile.NamedTemporaryFile(prefix='MidiIoTest') as rewrite_file:
+    with tempfile.NamedTemporaryFile(delete=False, prefix='MidiIoTest') as rewrite_file:
       original_midi = pretty_midi.PrettyMIDI(filename)
       original_midi.write(rewrite_file)  # Use file object
       # Back the file position to top to reload the rewrite_file
@@ -183,7 +183,7 @@ class MidiIoTest(absltest.TestCase):
       sequence_proto = midi_io.midi_to_sequence_proto(source_midi)
 
     # Translate the NoteSequence to MIDI and write to a file.
-    with tempfile.NamedTemporaryFile(prefix='MidiIoTest') as temp_file:
+    with tempfile.NamedTemporaryFile(delete=False, prefix='MidiIoTest') as temp_file:
       midi_io.sequence_proto_to_midi_file(sequence_proto, temp_file.name)
       # Read it back in and compare to source.
       created_midi = pretty_midi.PrettyMIDI(temp_file)  # Use file object
@@ -322,7 +322,7 @@ class MidiIoTest(absltest.TestCase):
     """
     sequence_proto = midi_io.midi_file_to_sequence_proto(
         self.midi_is_drum_filename)
-    with tempfile.NamedTemporaryFile(prefix='MidiDrumTest') as temp_file:
+    with tempfile.NamedTemporaryFile(delete=False, prefix='MidiDrumTest') as temp_file:
       midi_io.sequence_proto_to_midi_file(sequence_proto, temp_file.name)
       midi_data1 = mido.MidiFile(filename=self.midi_is_drum_filename)
       # Use the file object when writing to the tempfile
